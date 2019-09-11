@@ -16,10 +16,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.registerForPushNotifications()
+        
+        // Check if launched from notification
+        let notificationOption = launchOptions?[.remoteNotification]
+        
+        // 1
+        if let notification = notificationOption as? [String: AnyObject],
+            let aps = notification["aps"] as? [String: AnyObject] {
+            
+            // 2
+            AuthenticationRequest.makeAuthenticationRequest(aps)
+            
+            // 3
+            (window?.rootViewController as? UITabBarController)?.selectedIndex = 1
+        }
+        
         return true
+    }
+    
+    func application(
+        _ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+        fetchCompletionHandler completionHandler:
+        @escaping (UIBackgroundFetchResult) -> Void
+        ) {
+        guard let aps = userInfo["aps"] as? [String: AnyObject] else {
+            completionHandler(.failed)
+            return
+        }
+        AuthenticationRequest.makeAuthenticationRequest(aps)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -139,19 +168,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         // 2
         if let aps = userInfo["aps"] as? [String: AnyObject],
-            let newsItem = NewsItem.makeNewsItem(aps) {
+            let request = AuthenticationRequest.makeAuthenticationRequest(aps) {
             
             (window?.rootViewController as? UITabBarController)?.selectedIndex = 1
             
-            // 3
-            if response.actionIdentifier == Identifiers.viewAction,
-                let url = URL(string: newsItem.link) {
-                let safari = SFSafariViewController(url: url)
-                window?.rootViewController?.present(
-                    safari,
-                    animated: true,
-                    completion: nil)
-            }
+            // TODO: Should check for a response to accept/reject
+            //if response.actionIdentifier == Identifiers.viewAction,
         }
         
         // 4
