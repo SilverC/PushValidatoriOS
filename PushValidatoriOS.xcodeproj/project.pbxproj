@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		661122E12323090500A09129 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661122E02323090500A09129 /* AuthorizationViewController.swift */; };
+		6666CF7C2318DDDF00109873 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6666CF7B2318DDDF00109873 /* UserNotifications.framework */; };
+		6666CF7E2318DDDF00109873 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6666CF7D2318DDDF00109873 /* UserNotificationsUI.framework */; };
+		6666CF812318DDDF00109873 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6666CF802318DDDF00109873 /* NotificationViewController.swift */; };
+		6666CF842318DDDF00109873 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6666CF822318DDDF00109873 /* MainInterface.storyboard */; };
+		6666CF882318DDDF00109873 /* TwoFactorNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6666CF792318DDDF00109873 /* TwoFactorNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		66C371E2231758EE009E44EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C371E1231758EE009E44EE /* AppDelegate.swift */; };
 		66C371E4231758EE009E44EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C371E3231758EE009E44EE /* ViewController.swift */; };
 		66C371E7231758EE009E44EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66C371E5231758EE009E44EE /* Main.storyboard */; };
@@ -18,6 +24,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6666CF862318DDDF00109873 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66C371D6231758ED009E44EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6666CF782318DDDF00109873;
+			remoteInfo = TwoFactorNotification;
+		};
 		66C371F6231758F0009E44EE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 66C371D6231758ED009E44EE /* Project object */;
@@ -34,7 +47,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6666CF8C2318DDDF00109873 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6666CF882318DDDF00109873 /* TwoFactorNotification.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		661122E02323090500A09129 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		6666CF792318DDDF00109873 /* TwoFactorNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TwoFactorNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6666CF7B2318DDDF00109873 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		6666CF7D2318DDDF00109873 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		6666CF802318DDDF00109873 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		6666CF832318DDDF00109873 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		6666CF852318DDDF00109873 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66C371DE231758ED009E44EE /* PushValidatoriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushValidatoriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C371E1231758EE009E44EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66C371E3231758EE009E44EE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,9 +83,19 @@
 		66C37200231758F0009E44EE /* PushValidatoriOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushValidatoriOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C37204231758F0009E44EE /* PushValidatoriOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushValidatoriOSUITests.swift; sourceTree = "<group>"; };
 		66C37206231758F0009E44EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66C3721223175998009E44EE /* PushValidatoriOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PushValidatoriOS.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6666CF762318DDDF00109873 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6666CF7E2318DDDF00109873 /* UserNotificationsUI.framework in Frameworks */,
+				6666CF7C2318DDDF00109873 /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		66C371DB231758ED009E44EE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -76,12 +120,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6666CF7A2318DDDF00109873 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6666CF7B2318DDDF00109873 /* UserNotifications.framework */,
+				6666CF7D2318DDDF00109873 /* UserNotificationsUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6666CF7F2318DDDF00109873 /* TwoFactorNotification */ = {
+			isa = PBXGroup;
+			children = (
+				6666CF802318DDDF00109873 /* NotificationViewController.swift */,
+				6666CF822318DDDF00109873 /* MainInterface.storyboard */,
+				6666CF852318DDDF00109873 /* Info.plist */,
+			);
+			path = TwoFactorNotification;
+			sourceTree = "<group>";
+		};
 		66C371D5231758ED009E44EE = {
 			isa = PBXGroup;
 			children = (
 				66C371E0231758EE009E44EE /* PushValidatoriOS */,
 				66C371F8231758F0009E44EE /* PushValidatoriOSTests */,
 				66C37203231758F0009E44EE /* PushValidatoriOSUITests */,
+				6666CF7F2318DDDF00109873 /* TwoFactorNotification */,
+				6666CF7A2318DDDF00109873 /* Frameworks */,
 				66C371DF231758ED009E44EE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,6 +157,7 @@
 				66C371DE231758ED009E44EE /* PushValidatoriOS.app */,
 				66C371F5231758F0009E44EE /* PushValidatoriOSTests.xctest */,
 				66C37200231758F0009E44EE /* PushValidatoriOSUITests.xctest */,
+				6666CF792318DDDF00109873 /* TwoFactorNotification.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,9 +165,11 @@
 		66C371E0231758EE009E44EE /* PushValidatoriOS */ = {
 			isa = PBXGroup;
 			children = (
+				66C3721223175998009E44EE /* PushValidatoriOS.entitlements */,
 				66C371E1231758EE009E44EE /* AppDelegate.swift */,
 				66C371E3231758EE009E44EE /* ViewController.swift */,
 				66C371E5231758EE009E44EE /* Main.storyboard */,
+				661122E02323090500A09129 /* AuthorizationViewController.swift */,
 				66C371EB231758F0009E44EE /* Assets.xcassets */,
 				66C371ED231758F0009E44EE /* LaunchScreen.storyboard */,
 				66C371F0231758F0009E44EE /* Info.plist */,
@@ -131,6 +199,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6666CF782318DDDF00109873 /* TwoFactorNotification */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6666CF892318DDDF00109873 /* Build configuration list for PBXNativeTarget "TwoFactorNotification" */;
+			buildPhases = (
+				6666CF752318DDDF00109873 /* Sources */,
+				6666CF762318DDDF00109873 /* Frameworks */,
+				6666CF772318DDDF00109873 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TwoFactorNotification;
+			productName = TwoFactorNotification;
+			productReference = 6666CF792318DDDF00109873 /* TwoFactorNotification.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		66C371DD231758ED009E44EE /* PushValidatoriOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66C37209231758F0009E44EE /* Build configuration list for PBXNativeTarget "PushValidatoriOS" */;
@@ -138,10 +223,12 @@
 				66C371DA231758ED009E44EE /* Sources */,
 				66C371DB231758ED009E44EE /* Frameworks */,
 				66C371DC231758ED009E44EE /* Resources */,
+				6666CF8C2318DDDF00109873 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6666CF872318DDDF00109873 /* PBXTargetDependency */,
 			);
 			name = PushValidatoriOS;
 			productName = PushValidatoriOS;
@@ -194,8 +281,22 @@
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Casey Silver";
 				TargetAttributes = {
+					6666CF782318DDDF00109873 = {
+						CreatedOnToolsVersion = 10.3;
+					};
 					66C371DD231758ED009E44EE = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.DataProtection = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					66C371F4231758F0009E44EE = {
 						CreatedOnToolsVersion = 10.3;
@@ -223,11 +324,20 @@
 				66C371DD231758ED009E44EE /* PushValidatoriOS */,
 				66C371F4231758F0009E44EE /* PushValidatoriOSTests */,
 				66C371FF231758F0009E44EE /* PushValidatoriOSUITests */,
+				6666CF782318DDDF00109873 /* TwoFactorNotification */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6666CF772318DDDF00109873 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6666CF842318DDDF00109873 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		66C371DC231758ED009E44EE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -255,10 +365,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6666CF752318DDDF00109873 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6666CF812318DDDF00109873 /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		66C371DA231758ED009E44EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				661122E12323090500A09129 /* AuthorizationViewController.swift in Sources */,
 				66C371E4231758EE009E44EE /* ViewController.swift in Sources */,
 				66C371E2231758EE009E44EE /* AppDelegate.swift in Sources */,
 				66C371EA231758EE009E44EE /* PushValidatoriOS.xcdatamodeld in Sources */,
@@ -284,6 +403,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6666CF872318DDDF00109873 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6666CF782318DDDF00109873 /* TwoFactorNotification */;
+			targetProxy = 6666CF862318DDDF00109873 /* PBXContainerItemProxy */;
+		};
 		66C371F7231758F0009E44EE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 66C371DD231758ED009E44EE /* PushValidatoriOS */;
@@ -297,6 +421,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6666CF822318DDDF00109873 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6666CF832318DDDF00109873 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		66C371E5231758EE009E44EE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -316,6 +448,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6666CF8A2318DDDF00109873 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AADJG47W4U;
+				INFOPLIST_FILE = TwoFactorNotification/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.silver-dev.PushValidatoriOS.TwoFactorNotification";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6666CF8B2318DDDF00109873 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AADJG47W4U;
+				INFOPLIST_FILE = TwoFactorNotification/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.silver-dev.PushValidatoriOS.TwoFactorNotification";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		66C37207231758F0009E44EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -435,7 +605,9 @@
 		66C3720A231758F0009E44EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PushValidatoriOS/PushValidatoriOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AADJG47W4U;
 				INFOPLIST_FILE = PushValidatoriOS/Info.plist;
@@ -453,7 +625,9 @@
 		66C3720B231758F0009E44EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PushValidatoriOS/PushValidatoriOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AADJG47W4U;
 				INFOPLIST_FILE = PushValidatoriOS/Info.plist;
@@ -553,6 +727,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6666CF892318DDDF00109873 /* Build configuration list for PBXNativeTarget "TwoFactorNotification" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6666CF8A2318DDDF00109873 /* Debug */,
+				6666CF8B2318DDDF00109873 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		66C371D9231758ED009E44EE /* Build configuration list for PBXProject "PushValidatoriOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
