@@ -18,7 +18,7 @@
 		66C371E4231758EE009E44EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C371E3231758EE009E44EE /* ViewController.swift */; };
 		66C371E7231758EE009E44EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66C371E5231758EE009E44EE /* Main.storyboard */; };
 		66C371EA231758EE009E44EE /* PushValidatoriOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66C371E8231758EE009E44EE /* PushValidatoriOS.xcdatamodeld */; };
-		66C371EC231758F0009E44EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66C371EB231758F0009E44EE /* Assets.xcassets */; };
+		66C371EC231758F0009E44EE /* W.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66C371EB231758F0009E44EE /* W.xcassets */; };
 		66C371EF231758F0009E44EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66C371ED231758F0009E44EE /* LaunchScreen.storyboard */; };
 		66C371FA231758F0009E44EE /* PushValidatoriOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C371F9231758F0009E44EE /* PushValidatoriOSTests.swift */; };
 		66C37205231758F0009E44EE /* PushValidatoriOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C37204231758F0009E44EE /* PushValidatoriOSUITests.swift */; };
@@ -76,7 +76,7 @@
 		66C371E3231758EE009E44EE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		66C371E6231758EE009E44EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66C371E9231758EE009E44EE /* PushValidatoriOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushValidatoriOS.xcdatamodel; sourceTree = "<group>"; };
-		66C371EB231758F0009E44EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		66C371EB231758F0009E44EE /* W.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = W.xcassets; sourceTree = "<group>"; };
 		66C371EE231758F0009E44EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66C371F0231758F0009E44EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66C371F5231758F0009E44EE /* PushValidatoriOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushValidatoriOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,7 +181,7 @@
 				66C371E3231758EE009E44EE /* ViewController.swift */,
 				66C371E5231758EE009E44EE /* Main.storyboard */,
 				661122E02323090500A09129 /* AuthorizationViewController.swift */,
-				66C371EB231758F0009E44EE /* Assets.xcassets */,
+				66C371EB231758F0009E44EE /* W.xcassets */,
 				66C371ED231758F0009E44EE /* LaunchScreen.storyboard */,
 				66C371F0231758F0009E44EE /* Info.plist */,
 				66C371E8231758EE009E44EE /* PushValidatoriOS.xcdatamodeld */,
@@ -354,7 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66C371EF231758F0009E44EE /* LaunchScreen.storyboard in Resources */,
-				66C371EC231758F0009E44EE /* Assets.xcassets in Resources */,
+				66C371EC231758F0009E44EE /* W.xcassets in Resources */,
 				66C371E7231758EE009E44EE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,9 +13,9 @@ final class AuthenticationRequest: NSObject {
     let user_id: UUID
     let client_ip: String
     let transaction_id: UUID
-    let timestamp: Date
+    let timestamp: NSDate
     
-    init(application_name: String, user_id: UUID, client_ip: String, transaction_id: UUID, timestamp: Date) {
+    init(application_name: String, user_id: UUID, client_ip: String, transaction_id: UUID, timestamp: NSDate) {
         self.application_name = application_name
         self.user_id = user_id
         self.client_ip = client_ip
@@ -25,16 +25,16 @@ final class AuthenticationRequest: NSObject {
     
     class func makeAuthenticationRequest(_ notificationDictionary: [String: AnyObject]) -> AuthenticationRequest? {
         if let application_name = notificationDictionary["ApplicationName"] as? String,
-            let user_id = notificationDictionary["UserId"] as? UUID,
+            let user_id = notificationDictionary["UserId"] as? String,
             let client_ip = notificationDictionary["ClientIp"] as? String,
-            let transaction_id = notificationDictionary["TransactionId"] as? UUID,
-            let timestamp = notificationDictionary["Timestamp"] as? Date {
+            let transaction_id = notificationDictionary["TransactionId"] as? String,
+            let timestamp = notificationDictionary["Timestamp"] as? Double {
             
             let request = AuthenticationRequest(application_name: application_name,
-                                                user_id: user_id,
+                                                user_id: UUID(uuidString: user_id)!,
                                                 client_ip: client_ip,
-                                                transaction_id: transaction_id,
-                                                timestamp: timestamp)
+                                                transaction_id: UUID(uuidString: transaction_id)!,
+                                                timestamp: NSDate(timeIntervalSince1970: timestamp))
             let hashableRequest = [
                 CodingKeys.ApplicationName: application_name,
                 CodingKeys.UserId: user_id,
@@ -66,7 +66,7 @@ extension AuthenticationRequest: NSCoding {
             let user_id = aDecoder.decodeObject(forKey: CodingKeys.UserId) as? UUID,
             let client_ip = aDecoder.decodeObject(forKey: CodingKeys.ClientIp) as? String,
             let transaction_id = aDecoder.decodeObject(forKey: CodingKeys.TransactionId) as? UUID,
-            let timestamp = aDecoder.decodeObject(forKey: CodingKeys.Timestamp) as? Date {
+            let timestamp = aDecoder.decodeObject(forKey: CodingKeys.Timestamp) as? NSDate {
             self.init(application_name: application_name, user_id: user_id, client_ip: client_ip, transaction_id: transaction_id, timestamp: timestamp)
         } else {
             return nil

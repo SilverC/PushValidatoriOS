@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        UNUserNotificationCenter.current().delegate = self
+
         // Override point for customization after application launch.
         self.registerForPushNotifications()
         
@@ -28,11 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let notification = notificationOption as? [String: AnyObject],
             let aps = notification["aps"] as? [String: AnyObject] {
             
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "authorization")
+            window!.rootViewController!.present(vc, animated: true)
+
             // 2
             AuthenticationRequest.makeAuthenticationRequest(aps)
-            
-            // 3
-            (window?.rootViewController as? UITabBarController)?.selectedIndex = 1
         }
         
         return true
@@ -158,25 +162,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
+    
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
-        withCompletionHandler completionHandler: @escaping () -> Void) {
+        withCompletionHandler completionHandler: @escaping () -> Void)
+    {
+        
+        let id = response.notification.request.identifier
+        print("Received notification with ID = \(id)")
         
         // 1
         let userInfo = response.notification.request.content.userInfo
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "authorization")
+        window!.rootViewController!.present(vc, animated: true)
+        //let vc = AuthorizationViewController()
+        //vc.data = userInfo
+        //let navigationController = self.window?.rootViewController as! UINavigationController
+        //navigationController.pushViewController(vc, animated: true)
         
         // 2
-        if let aps = userInfo["aps"] as? [String: AnyObject],
+        if let aps = userInfo as? [String: AnyObject],
             let request = AuthenticationRequest.makeAuthenticationRequest(aps) {
-            
-            (window?.rootViewController as? UITabBarController)?.selectedIndex = 1
-            
+
             // TODO: Should check for a response to accept/reject
             //if response.actionIdentifier == Identifiers.viewAction,
+            print("Entered notification received function")
         }
         
         // 4
         completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        let id = notification.request.identifier
+        print("Received notification with ID = \(id)")
+        
+        completionHandler([.sound, .alert])
     }
 }

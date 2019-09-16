@@ -10,7 +10,7 @@ import UIKit
 
 class AuthorizationViewController: UIViewController {
     static let AuthenticationRequest = "AuthenticationRequestNotification"
-    //var request:AuthenticationRequest = nil
+    var data : [AnyHashable : Any] = [:]
     
     @IBOutlet weak var application_label: UILabel!
     @IBOutlet weak var clientip_label: UILabel!
@@ -20,7 +20,7 @@ class AuthorizationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(AuthorizationViewController.receivedAuthenticationRequestFeedNotification(_:)),
@@ -33,12 +33,16 @@ class AuthorizationViewController: UIViewController {
     }
     
     @objc func receivedAuthenticationRequestFeedNotification(_ notification: Notification) {
-        application_label.text = notification.userInfo!["ApplicationName"] as? String
-        clientip_label.text = notification.userInfo!["ClientIp"] as? String
-        userid_label.text = notification.userInfo!["UserId"] as? String
-        transactionid_label.text = notification.userInfo!["TransactionId"] as? String
-        timestamp_label.text = notification.userInfo!["Timestamp"] as? String
+        data = notification.userInfo!
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        application_label.text = data["ApplicationName"] as? String
+        clientip_label.text = data["ClientIp"] as? String
+        userid_label.text = data["UserId"] as? String
+        transactionid_label.text = data["TransactionId"] as? String
+        timestamp_label.text = formatter.string(from: NSDate(timeIntervalSince1970: (data["Timestamp"] as! TimeInterval)) as Date)
     }
+
     /*
     // MARK: - Navigation
 
@@ -48,5 +52,4 @@ class AuthorizationViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

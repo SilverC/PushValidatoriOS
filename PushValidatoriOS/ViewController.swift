@@ -32,18 +32,19 @@ class ViewController: UIViewController {
         content.body = "Notification triggered"
         content.userInfo = [
             AnyHashable("ApplicationName"): "Sample Web App",
-            AnyHashable("UserId"): UUID(),
+            AnyHashable("UserId"): UUID().uuidString,
             AnyHashable("ClientIp"): "192.168.10.1",
-            AnyHashable("TransactionId"): UUID(),
+            AnyHashable("TransactionId"): UUID().uuidString,
             AnyHashable("Timestamp"): NSDate().timeIntervalSince1970
         ]
         
         // 3
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
         
         // 4
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        print("Sent local notification")
     }
 }
 
