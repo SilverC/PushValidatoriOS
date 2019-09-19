@@ -11,12 +11,18 @@ import UIKit
 class AuthorizationViewController: UIViewController {
     static let AuthenticationRequest = "AuthenticationRequestNotification"
     var data : [AnyHashable : Any] = [:]
+    var qrcode: String!
     
     @IBOutlet weak var application_label: UILabel!
     @IBOutlet weak var clientip_label: UILabel!
     @IBOutlet weak var userid_label: UILabel!
     @IBOutlet weak var transactionid_label: UILabel!
     @IBOutlet weak var timestamp_label: UILabel!
+    
+    @IBAction func cancelButtonClicked(_ sender: UIButton) {
+        print("Cancel button clicked")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +49,34 @@ class AuthorizationViewController: UIViewController {
         timestamp_label.text = formatter.string(from: NSDate(timeIntervalSince1970: (data["Timestamp"] as! TimeInterval)) as Date)
     }
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func unwindToHomeScreen(segue: UIStoryboardSegue) {
+        print("unwind function")
+        if segue.source is QRScannerController {
+            if let sourceVC = segue.source as? QRScannerController {
+                print("unwind function url: \(String(describing: sourceVC.qrcode))")
+                qrcode = sourceVC.qrcode
+                let url = URL(string: "https://jsonplaceholder.typicode.com/todos/1")!
+                let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
+                    if let data = data {
+                        do {
+                            let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                            print(jsonSerialized!)
+                        }
+                        catch let error as NSError {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    else if let error = error {
+                        print(error.localizedDescription)
+                    }
+                })
+                task.resume()
+            }
+        }
+        else {
+            print("segue source did not match \(segue.source.debugDescription)")
+        }
+        dismiss(animated: true, completion: nil)
     }
-    */
 }

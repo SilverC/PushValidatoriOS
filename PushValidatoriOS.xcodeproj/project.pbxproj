@@ -14,6 +14,7 @@
 		6666CF812318DDDF00109873 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6666CF802318DDDF00109873 /* NotificationViewController.swift */; };
 		6666CF842318DDDF00109873 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6666CF822318DDDF00109873 /* MainInterface.storyboard */; };
 		6666CF882318DDDF00109873 /* TwoFactorNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6666CF792318DDDF00109873 /* TwoFactorNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		66871DEB2333199D00320AD8 /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66871DEA2333199D00320AD8 /* QRScannerController.swift */; };
 		66C371E2231758EE009E44EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C371E1231758EE009E44EE /* AppDelegate.swift */; };
 		66C371E4231758EE009E44EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C371E3231758EE009E44EE /* ViewController.swift */; };
 		66C371E7231758EE009E44EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66C371E5231758EE009E44EE /* Main.storyboard */; };
@@ -71,6 +72,7 @@
 		6666CF802318DDDF00109873 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		6666CF832318DDDF00109873 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		6666CF852318DDDF00109873 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66871DEA2333199D00320AD8 /* QRScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
 		66C371DE231758ED009E44EE /* PushValidatoriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushValidatoriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C371E1231758EE009E44EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66C371E3231758EE009E44EE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				66C371ED231758F0009E44EE /* LaunchScreen.storyboard */,
 				66C371F0231758F0009E44EE /* Info.plist */,
 				66C371E8231758EE009E44EE /* PushValidatoriOS.xcdatamodeld */,
+				66871DEA2333199D00320AD8 /* QRScannerController.swift */,
 			);
 			path = PushValidatoriOS;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				66C371E2231758EE009E44EE /* AppDelegate.swift in Sources */,
 				66C371EA231758EE009E44EE /* PushValidatoriOS.xcdatamodeld in Sources */,
 				663CF39D23287F7600F3EF36 /* AuthenticationRequest.swift in Sources */,
+				66871DEB2333199D00320AD8 /* QRScannerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +627,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AADJG47W4U;
 				INFOPLIST_FILE = PushValidatoriOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -643,6 +648,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AADJG47W4U;
 				INFOPLIST_FILE = PushValidatoriOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

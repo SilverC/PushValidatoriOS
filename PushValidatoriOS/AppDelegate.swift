@@ -184,7 +184,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         // 2
         if let aps = userInfo as? [String: AnyObject],
-            let request = AuthenticationRequest.makeAuthenticationRequest(aps) {
+            let _ = AuthenticationRequest.makeAuthenticationRequest(aps) {
 
             // TODO: Should check for a response to accept/reject
             //if response.actionIdentifier == Identifiers.viewAction,
