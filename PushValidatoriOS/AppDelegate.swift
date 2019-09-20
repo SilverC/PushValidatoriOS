@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window!.rootViewController!.present(vc, animated: true)
 
             // 2
-            AuthenticationRequest.makeAuthenticationRequest(aps)
+            let _ = AuthenticationRequest.makeAuthenticationRequest(aps)
         }
         
         return true
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             completionHandler(.failed)
             return
         }
-        AuthenticationRequest.makeAuthenticationRequest(aps)
+        let _ = AuthenticationRequest.makeAuthenticationRequest(aps)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

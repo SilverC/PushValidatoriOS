@@ -12,6 +12,7 @@ class AuthorizationViewController: UIViewController {
     static let AuthenticationRequest = "AuthenticationRequestNotification"
     var data : [AnyHashable : Any] = [:]
     var qrcode: String!
+    var result: String!
     
     @IBOutlet weak var application_label: UILabel!
     @IBOutlet weak var clientip_label: UILabel!
@@ -50,33 +51,37 @@ class AuthorizationViewController: UIViewController {
     }
 
     // MARK: - Navigation
-    @IBAction func unwindToHomeScreen(segue: UIStoryboardSegue) {
-        print("unwind function")
-        if segue.source is QRScannerController {
-            if let sourceVC = segue.source as? QRScannerController {
-                print("unwind function url: \(String(describing: sourceVC.qrcode))")
-                qrcode = sourceVC.qrcode
-                let url = URL(string: "https://jsonplaceholder.typicode.com/todos/1")!
-                let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-                    if let data = data {
-                        do {
-                            let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                            print(jsonSerialized!)
-                        }
-                        catch let error as NSError {
-                            print(error.localizedDescription)
-                        }
-                    }
-                    else if let error = error {
-                        print(error.localizedDescription)
-                    }
-                })
-                task.resume()
-            }
-        }
-        else {
-            print("segue source did not match \(segue.source.debugDescription)")
-        }
-        dismiss(animated: true, completion: nil)
-    }
+//    @IBAction func unwindToHomeScreen(segue: UIStoryboardSegue) {
+//        print("success unwind function: \(String(describing: segue.source.title))")
+//        if segue.source is QRScannerController {
+//            if let sourceVC = segue.source as? QRScannerController {
+//                print("success unwind function url: \(String(describing: sourceVC.qrcode))")
+//                self.qrcode = sourceVC.qrcode
+//                let url = URL(string: "https://jsonplaceholder.typicode.com/todos/1")!
+//                let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
+//                    if let data = data {
+//                        do {
+//                            let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+//                            print(jsonSerialized!)
+//                            self.result = "Success"
+//                        }
+//                        catch let error as NSError {
+//                            print(error.localizedDescription)
+//                            self.result = "Failure"
+//                        }
+//                    }
+//                    else if let error = error {
+//                        print(error.localizedDescription)
+//                        self.result = "Failure"
+//                    }
+//                })
+//                task.resume()
+//            }
+//        }
+//        else {
+//            print("segue source did not match \(segue.source.debugDescription)")
+//        }
+//        
+//        dismiss(animated: true, completion: nil)
+//    }
 }
