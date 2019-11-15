@@ -152,6 +152,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
         print("Device Token: \(token)")
+        
+        let context = persistentContainer.viewContext
+        
+        let tokenFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Device")
+        //tokenFetchRequest.predicate = NSPredicate(format: "token == \(token)")
+        
+        do {
+            let results = try context.fetch(tokenFetchRequest)
+            if results.count == 0 {
+                let entity = NSEntityDescription.entity(forEntityName: "Device", in: context)!
+                let device = NSManagedObject(entity: entity, insertInto: context)
+                device.setValue(token, forKey: "token")
+                try context.save()
+            }
+            else {
+                results[0].setValue(token, forKey: "token")
+                try context.save()
+            }
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
     
     func application(

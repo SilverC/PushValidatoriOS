@@ -23,6 +23,7 @@
 		66C371EF231758F0009E44EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66C371ED231758F0009E44EE /* LaunchScreen.storyboard */; };
 		66C371FA231758F0009E44EE /* PushValidatoriOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C371F9231758F0009E44EE /* PushValidatoriOSTests.swift */; };
 		66C37205231758F0009E44EE /* PushValidatoriOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C37204231758F0009E44EE /* PushValidatoriOSUITests.swift */; };
+		66DDC762237E5D0F00BBE7EC /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DDC761237E5D0F00BBE7EC /* RegisterController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		66C37204231758F0009E44EE /* PushValidatoriOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushValidatoriOSUITests.swift; sourceTree = "<group>"; };
 		66C37206231758F0009E44EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66C3721223175998009E44EE /* PushValidatoriOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PushValidatoriOS.entitlements; sourceTree = "<group>"; };
+		66DDC761237E5D0F00BBE7EC /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 				66C371F0231758F0009E44EE /* Info.plist */,
 				66C371E8231758EE009E44EE /* PushValidatoriOS.xcdatamodeld */,
 				66871DEA2333199D00320AD8 /* QRScannerController.swift */,
+				66DDC761237E5D0F00BBE7EC /* RegisterController.swift */,
 			);
 			path = PushValidatoriOS;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				661122E12323090500A09129 /* AuthorizationViewController.swift in Sources */,
 				66C371E4231758EE009E44EE /* ViewController.swift in Sources */,
 				66C371E2231758EE009E44EE /* AppDelegate.swift in Sources */,
+				66DDC762237E5D0F00BBE7EC /* RegisterController.swift in Sources */,
 				66C371EA231758EE009E44EE /* PushValidatoriOS.xcdatamodeld in Sources */,
 				663CF39D23287F7600F3EF36 /* AuthenticationRequest.swift in Sources */,
 				66871DEB2333199D00320AD8 /* QRScannerController.swift in Sources */,
