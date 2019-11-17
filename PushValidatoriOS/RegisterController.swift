@@ -147,10 +147,16 @@ extension RegisterController: AVCaptureMetadataOutputObjectsDelegate {
                 
                 //Parse values from qrcode
                 let queryItems = URLComponents(string: qrcode)?.queryItems
-                let secret = queryItems?.filter({$0.name == "secret"}).first
-                print(secret?.value ?? "Secret value not found")
-                let deviceId = queryItems?.filter({$0.name == "id"}).first
-                print(deviceId?.value ?? "Device ID not found")
+                let secretItem = queryItems?.filter({$0.name == "secret"}).first
+                let secret = secretItem?.value ?? "Secret value not found"
+                print(secret)
+                
+                let key = Data(base64Encoded: secret)!
+                print(key.description)
+                
+                let deviceIdItem = queryItems?.filter({$0.name == "id"}).first
+                let deviceId = deviceIdItem?.value ?? "Device ID not found"
+                print(deviceId)
                 
                 // Get token
                 guard let appDelegate =
@@ -168,13 +174,23 @@ extension RegisterController: AVCaptureMetadataOutputObjectsDelegate {
                 }
                 print("token retreived from core data: \(token)")
                 
+                //Get Public Key
+                let publicKey = "TestPublicKey"
+                
+                // Build HMAC
+                let data = deviceId + "\(token)" + publicKey
+                print(data)
+                let hmac = data.hmac(algorithm: .sha256, key: key)
+                print("HMAC : " + hmac)
+                
                 // Update device in service
                 let json: [String: Any] = [
                     "DeviceId": "\(String(describing: deviceId))",
                     "DeviceToken": "\(token)",
-                    "PublicKey": "Test Public Key",
-                    "HMAC": "Fail"
+                    "PublicKey": publicKey,
+                    "HMAC": hmac
                 ]
+                print(json)
                 let jsonData = try? JSONSerialization.data(withJSONObject: json)
                 
                 let url = URL(string: "https://localhost:5001/Devices/Update")!
