@@ -175,10 +175,62 @@ extension RegisterController: AVCaptureMetadataOutputObjectsDelegate {
                 print("token retreived from core data: \(token)")
                 
                 //Get Public Key
-                let publicKey = "TestPublicKey"
+                
+                //Check for exiting key
+                let getquery: [String: Any] = [
+                    kSecClass as String:              kSecClassKey,
+                    kSecAttrApplicationTag as String: deviceId,
+                    kSecAttrKeyType as String:        kSecAttrKeyTypeEC,
+                    kSecAttrKeySizeInBits as String:  256,
+                    kSecAttrTokenID as String:        kSecAttrTokenIDSecureEnclave,
+                    kSecReturnRef as String:          true
+                ]
+                var item: CFTypeRef?
+                var publicKey: SecKey?
+                let status = SecItemCopyMatching(getquery as CFDictionary, &item)
+                
+                // If key exists then use it; otherwise generate one
+                if status == errSecSuccess {
+                    print("Found existing key")
+                    let privateKey = (item as! SecKey)
+                    publicKey = SecKeyCopyPublicKey(privateKey)
+                }
+                else {
+                    print("Unable to find an existing key")
+                    let access =
+                    SecAccessControlCreateWithFlags(kCFAllocatorDefault,
+                                                    kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
+                                                    .privateKeyUsage,
+                                                    nil)!   // Ignore error
+                    let attributes: [String: Any] = [
+                      kSecAttrKeyType as String:            kSecAttrKeyTypeEC,
+                      kSecAttrKeySizeInBits as String:      256,
+                      kSecAttrTokenID as String:            kSecAttrTokenIDSecureEnclave,
+                      kSecPrivateKeyAttrs as String: [
+                        kSecAttrIsPermanent as String:      true,
+                        kSecAttrApplicationTag as String:   deviceId,
+                        kSecAttrAccessControl as String:    access
+                      ]
+                    ]
+                    var error: Unmanaged<CFError>?
+                    guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) else {
+                        print("Failed to produce private key")
+                        captureSession.stopRunning()
+                        self.performSegue(withIdentifier: "unwindFromRegisterDone", sender: self)
+                        return
+                    }
+
+                    publicKey = SecKeyCopyPublicKey(privateKey)//"TestPublicKey"
+                }
+                
+                var error: Unmanaged<CFError>?
+                let publicKeyData = SecKeyCopyExternalRepresentation(publicKey!, &error)! as Data
+                let keyConverter = AsymmetricKeyConverter()
+                let pemKey = keyConverter.exportPublicKeyToPEM(publicKeyData, keyType: kSecAttrKeyTypeECSECPrimeRandom as String, keySize: 256)
+                print(pemKey ?? "Failed to convert key to PEM format")
                 
                 // Build HMAC
-                let data = deviceId + "\(token)" + publicKey
+                let data = deviceId + "\(token)" + (pemKey ?? "TestPublicKey")
                 print(data)
                 let hmac = data.hmac(algorithm: .sha256, key: key)
                 print("HMAC : " + hmac)
@@ -187,7 +239,7 @@ extension RegisterController: AVCaptureMetadataOutputObjectsDelegate {
                 let json: [String: Any] = [
                     "DeviceId": "\(String(describing: deviceId))",
                     "DeviceToken": "\(token)",
-                    "PublicKey": publicKey,
+                    "PublicKey": pemKey ?? "TestPublicKey",
                     "HMAC": hmac
                 ]
                 print(json)

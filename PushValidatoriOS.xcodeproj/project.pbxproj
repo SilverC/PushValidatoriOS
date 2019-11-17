@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		660CBFDF2381BE6D00878AE3 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660CBFDE2381BE6D00878AE3 /* HMAC.swift */; };
+		660CBFE12381E8F400878AE3 /* AsymmetricKeyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660CBFE02381E8F400878AE3 /* AsymmetricKeyConverter.swift */; };
 		661122E12323090500A09129 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661122E02323090500A09129 /* AuthorizationViewController.swift */; };
 		663CF39D23287F7600F3EF36 /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663CF39C23287F7600F3EF36 /* AuthenticationRequest.swift */; };
 		6666CF7C2318DDDF00109873 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6666CF7B2318DDDF00109873 /* UserNotifications.framework */; };
@@ -68,6 +69,7 @@
 /* Begin PBXFileReference section */
 		660CBFDB2381BE0E00878AE3 /* PushValidatoriOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushValidatoriOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		660CBFDE2381BE6D00878AE3 /* HMAC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
+		660CBFE02381E8F400878AE3 /* AsymmetricKeyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsymmetricKeyConverter.swift; sourceTree = "<group>"; };
 		661122E02323090500A09129 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		663CF39C23287F7600F3EF36 /* AuthenticationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRequest.swift; sourceTree = "<group>"; };
 		6666CF792318DDDF00109873 /* TwoFactorNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TwoFactorNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +198,7 @@
 				660CBFDB2381BE0E00878AE3 /* PushValidatoriOS-Bridging-Header.h */,
 				66DDC761237E5D0F00BBE7EC /* RegisterController.swift */,
 				660CBFDE2381BE6D00878AE3 /* HMAC.swift */,
+				660CBFE02381E8F400878AE3 /* AsymmetricKeyConverter.swift */,
 			);
 			path = PushValidatoriOS;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				66C371E4231758EE009E44EE /* ViewController.swift in Sources */,
 				66C371E2231758EE009E44EE /* AppDelegate.swift in Sources */,
 				66DDC762237E5D0F00BBE7EC /* RegisterController.swift in Sources */,
+				660CBFE12381E8F400878AE3 /* AsymmetricKeyConverter.swift in Sources */,
 				66C371EA231758EE009E44EE /* PushValidatoriOS.xcdatamodeld in Sources */,
 				663CF39D23287F7600F3EF36 /* AuthenticationRequest.swift in Sources */,
 				66871DEB2333199D00320AD8 /* QRScannerController.swift in Sources */,
