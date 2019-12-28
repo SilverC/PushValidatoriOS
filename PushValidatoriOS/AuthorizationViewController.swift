@@ -42,10 +42,11 @@ class AuthorizationViewController: UIViewController {
     @objc func receivedAuthenticationRequestFeedNotification(_ notification: Notification) {
         data = notification.userInfo!
         let formatter = DateFormatter()
+        print(data)
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         application_label.text = data["ApplicationName"] as? String
         clientip_label.text = data["ClientIp"] as? String
-        userid_label.text = data["UserId"] as? String
+        userid_label.text = data["UserName"] as? String
         transactionid_label.text = data["TransactionId"] as? String
         timestamp_label.text = formatter.string(from: NSDate(timeIntervalSince1970: (data["Timestamp"] as! TimeInterval)) as Date)
     }

@@ -169,8 +169,11 @@ extension RegisterController: AVCaptureMetadataOutputObjectsDelegate {
                 do {
                     let results = try context.fetch(tokenFetchRequest)
                     token = results[0].value(forKey: "token") as! String
+                    results[0].setValue(deviceId, forKey: "id")
+                    results[0].setValue(secret, forKey: "secret")
+                    try context.save()
                 } catch let error as NSError {
-                    print("Could not save. \(error), \(error.userInfo)")
+                    print("Could not save or retrieve data. \(error), \(error.userInfo)")
                 }
                 print("token retreived from core data: \(token)")
                 

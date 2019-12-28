@@ -192,6 +192,6 @@ class AsymmetricKeyConverter: NSObject {
         //if currentLine.count > 0 { resultString += currentLine + "\n" }
         // final tag
         //resultString += PublicKeyFinalTag
-        return resultString
+        return base64EncodedString
     }
 }
