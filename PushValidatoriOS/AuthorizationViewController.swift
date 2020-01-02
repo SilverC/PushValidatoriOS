@@ -18,6 +18,7 @@ class AuthorizationViewController: UIViewController {
     @IBOutlet weak var clientip_label: UILabel!
     @IBOutlet weak var userid_label: UILabel!
     @IBOutlet weak var transactionid_label: UILabel!
+    @IBOutlet weak var geolocation_label: UILabel!
     @IBOutlet weak var timestamp_label: UILabel!
     
     @IBAction func cancelButtonClicked(_ sender: UIButton) {
@@ -46,6 +47,7 @@ class AuthorizationViewController: UIViewController {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         application_label.text = data["ApplicationName"] as? String
         clientip_label.text = data["ClientIp"] as? String
+        geolocation_label.text = data["GeoLocation"] as? String
         userid_label.text = data["UserName"] as? String
         transactionid_label.text = data["TransactionId"] as? String
         timestamp_label.text = formatter.string(from: NSDate(timeIntervalSince1970: (data["Timestamp"] as! TimeInterval)) as Date)

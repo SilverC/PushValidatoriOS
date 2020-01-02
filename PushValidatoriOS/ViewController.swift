@@ -29,12 +29,27 @@ class ViewController: UIViewController {
                 print("No")
             }
         }
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(AuthorizationViewController.receivedAuthenticationRequestFeedNotification(_:)),
+                                               name: NSNotification.Name(rawValue: AuthorizationViewController.AuthenticationRequest),
+                                               object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func receivedAuthenticationRequestFeedNotification(_ notification: Notification) {
+        data = notification.userInfo!
+        print(data)
+        self.transactionID = UUID.init(uuidString: data["TransactionId"] as! String)
     }
 
     @IBAction func sendNotification(_ sender: Any) {
         // 1
         let content = UNMutableNotificationContent()
-        self.transactionID = UUID()
+
         content.title = "Notification Tutorial"
         content.subtitle = "Subtitle"
         content.body = "Notification triggered"
@@ -42,7 +57,8 @@ class ViewController: UIViewController {
             AnyHashable("ApplicationName"): "Sample Web App",
             AnyHashable("UserName"): "fake@test.com",
             AnyHashable("ClientIp"): "192.168.10.1",
-            AnyHashable("TransactionId"): self.transactionID.uuidString,
+            AnyHashable("GeoLocation"): "Harrisonburg, VA, USA",
+            AnyHashable("TransactionId"): UUID().uuidString,
             AnyHashable("Timestamp"): NSDate().timeIntervalSince1970
         ]
         
