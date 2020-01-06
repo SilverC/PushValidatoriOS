@@ -248,7 +248,7 @@ extension RegisterController: AVCaptureMetadataOutputObjectsDelegate {
                 print(json)
                 let jsonData = try? JSONSerialization.data(withJSONObject: json)
                 
-                let url = URL(string: "https://localhost:5001/Devices/Update")!
+                let url = URL(string: "https://pushvalidatorservice.azurewebsites.net/Devices/Update")!
                 var request = URLRequest(url: url)
                 request.httpMethod = "PUT"
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -256,18 +256,28 @@ extension RegisterController: AVCaptureMetadataOutputObjectsDelegate {
                 let configuration = URLSessionConfiguration.default
                 
                 let task = URLSession(configuration: configuration, delegate: self, delegateQueue: nil).dataTask(with: request, completionHandler: { data, response, error in
-                    if let data = data {
-                        do {
-                            let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                            print(jsonSerialized!)
+                    if let httpResponse = response as? HTTPURLResponse {
+                        print("Response Status Code:")
+                        print(httpResponse.statusCode)
+                        if httpResponse.statusCode == 200 || httpResponse.statusCode == 204 {
+                            print("Successfully registered device")
                         }
-                        catch let error as NSError {
-                            print(error.localizedDescription)
+                        else {
+                           print("Failed to communicate with server")
                         }
                     }
-                    else if let error = error {
-                        print(error.localizedDescription)
-                    }
+//                    if let data = data {
+//                        do {
+//                            let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+//                            print(jsonSerialized!)
+//                        }
+//                        catch let error as NSError {
+//                            print(error.localizedDescription)
+//                        }
+//                    }
+//                    else if let error = error {
+//                        print(error.localizedDescription)
+//                    }
                 })
                 task.resume()
                 

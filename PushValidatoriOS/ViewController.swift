@@ -76,6 +76,104 @@ class ViewController: UIViewController {
         if segue.source is AuthorizationViewController {
             if segue.source is AuthorizationViewController {
                 result.text = "Denied by user"
+                // Get deviceId
+                guard let appDelegate =
+                  UIApplication.shared.delegate as? AppDelegate else {
+                    return
+                }
+                let context = appDelegate.persistentContainer.viewContext
+                let deviceIdFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Device")
+                var deviceId = ""
+                do {
+                    let results = try context.fetch(deviceIdFetchRequest)
+                    deviceId = results[0].value(forKey: "id") as! String
+                } catch let error as NSError {
+                    print("Could not retrieve deviceId. \(error), \(error.userInfo)")
+                }
+                print("token retreived from core data: \(deviceId)")
+                
+                // Sign data
+                let dataString = self.transactionID.uuidString + "False" + "N/A" + "N/A" + "N/A"
+                print(dataString)
+                let dataToSign = dataString.data(using: .utf8)! as CFData
+                print(hexStringFromData(input: dataToSign))
+                print(dataString.sha256())
+                let getquery: [String: Any] = [
+                    kSecClass as String:              kSecClassKey,
+                    kSecAttrApplicationTag as String: deviceId,
+                    kSecAttrKeyType as String:        kSecAttrKeyTypeEC,
+                    kSecAttrKeySizeInBits as String:  256,
+                    kSecAttrTokenID as String:        kSecAttrTokenIDSecureEnclave,
+                    kSecReturnRef as String:          true
+                ]
+                var item: CFTypeRef?
+                let status = SecItemCopyMatching(getquery as CFDictionary, &item)
+                
+                // If key exists then use it; otherwise generate one
+                var signatureString = ""
+                if status == errSecSuccess {
+                    print("Found existing key")
+                    let privateKey = (item as! SecKey)
+                    let algorithm: SecKeyAlgorithm = .ecdsaSignatureMessageX962SHA256
+                    var error: Unmanaged<CFError>?
+                    guard let signature = SecKeyCreateSignature(privateKey,
+                        algorithm,
+                        dataToSign,
+                        &error) as Data? else {
+                            print("Failed to sign data. \(String(describing: error))")
+                            return
+                        }
+                    print(hexStringFromData(input: signature as NSData))
+                    signatureString = signature.base64EncodedString()
+                    print(signatureString)
+                    let publicKey = SecKeyCopyPublicKey(privateKey)!
+                    let verify = SecKeyVerifySignature(publicKey,
+                        algorithm,
+                        dataToSign,
+                        signature as CFData,
+                        &error)
+                    print("Result of verification: \(verify)")
+                    let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, &error)! as Data
+                    let keyConverter = AsymmetricKeyConverter()
+                    let pemKey = keyConverter.exportPublicKeyToPEM(publicKeyData, keyType: kSecAttrKeyTypeECSECPrimeRandom as String, keySize: 256)
+                    print(pemKey ?? "Failed to convert key to PEM format")
+                }
+                
+                // Build json data object
+                let json: [String: Any] = [
+                                   "ServerURI": "N/A",
+                                   "CertificateFingerprint": "N/A",
+                                   "ServerIP": "N/A",
+                                   "Result": "False",
+                                   "TransactionId": "\(self.transactionID.uuidString)",
+                                   "Signature": signatureString
+                               ]
+                print(json)
+                let jsonData = try? JSONSerialization.data(withJSONObject: json)
+                
+                let url = URL(string: "https://pushvalidatorservice.azurewebsites.net/Transaction/SubmitAuthenticationResult")!
+                var request = URLRequest(url: url)
+                request.httpMethod = "PUT"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.httpBody = jsonData
+                
+                let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+                    if let httpResponse = response as? HTTPURLResponse {
+                        print("Response Status Code:")
+                        print(httpResponse.statusCode)
+                        if httpResponse.statusCode == 200 || httpResponse.statusCode == 204 {
+                            DispatchQueue.main.async {
+                                self.result.text = "Denied by user"
+                            }
+                        }
+                        else {
+                            DispatchQueue.main.async {
+                                self.result.text = "Denied by user.\nFailed to communicate with server"
+                            }
+                        }
+                    }
+                })
+                task.resume()
             }
         }
     }
@@ -194,30 +292,50 @@ class ViewController: UIViewController {
                                    "Signature": signatureString
                                ]
                 print(json)
+                let jsonData = try? JSONSerialization.data(withJSONObject: json)
                 
-                let url = URL(string: "https://psuhvalidator.com/transactions/update")!
-                let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-                    if let data = data {
-                        do {
-                            let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                            print(jsonSerialized!)
+                let url = URL(string: "https://pushvalidatorservice.azurewebsites.net/Transaction/SubmitAuthenticationResult")!
+                var request = URLRequest(url: url)
+                request.httpMethod = "PUT"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.httpBody = jsonData
+                
+                let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+                    if let httpResponse = response as? HTTPURLResponse {
+                        print("Response Status Code:")
+                        print(httpResponse.statusCode)
+                        if httpResponse.statusCode == 200 || httpResponse.statusCode == 204 {
                             DispatchQueue.main.async {
                                 self.result.text = "Approved by user"
                             }
                         }
-                        catch let error as NSError {
-                            print(error.localizedDescription)
+                        else {
                             DispatchQueue.main.async {
                                 self.result.text = "Failed to communicate with server"
                             }
                         }
                     }
-                    else if let error = error {
-                        print(error.localizedDescription)
-                        DispatchQueue.main.async {
-                            self.result.text = "Failed to communicate with server"
-                        }
-                    }
+//                    if let data = data {
+//                        do {
+//                            let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+//                            print(jsonSerialized!)
+//                            DispatchQueue.main.async {
+//                                self.result.text = "Approved by user"
+//                            }
+//                        }
+//                        catch let error as NSError {
+//                            print(error.localizedDescription)
+//                            DispatchQueue.main.async {
+//                                self.result.text = "Failed to communicate with server"
+//                            }
+//                        }
+//                    }
+//                    else if let error = error {
+//                        print(error.localizedDescription)
+//                        DispatchQueue.main.async {
+//                            self.result.text = "Failed to communicate with server"
+//                        }
+//                    }
                 })
                 task.resume()
             }
